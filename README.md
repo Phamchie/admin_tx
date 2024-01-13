@@ -1,3 +1,2 @@
-```setup tool : pip install colorama```
-tên tài khoản : `chien`
-mật khẩu : `123456`
+1. `tên tài khoản` : `chien`
+2. `mật khẩu` : `123456`
