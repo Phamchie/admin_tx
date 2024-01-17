@@ -1,316 +1,117 @@
+import os
+os.system('cls' if os.name == 'nt' else 'clear')
+print("Starting App Game")
+print("Start XocXoc..")
+print("==========================")
+import pygame
 import random
 import time
-import os
-import colorama
-from colorama import Fore
-from colorama import Style
+pygame.init()
 
-colorama.init()
+screen_x = 750
+screen_y = 500
+screen = pygame.display.set_mode((screen_x, screen_y))
 
-os.system('cls' if os.name == 'nt' else 'clear')
-print("""
-  _                 _       
- | |               (_)      
- | |     ___   __ _ _ _ __  
- | |    / _ \ / _` | | '_ \ 
- | |___| (_) | (_| | | | | |
- |______\___/ \__, |_|_| |_|
-               __/ |        
-              |___/         
-""")
-print("Trang Đăng Nhập Quản Trị")
+pygame.display.set_caption('game bai chien pham - testing game')
+banner = pygame.image.load('bg.png').convert_alpha()
 
-adm = str("chien")
-paswd = str("123456")
+mini_game_banner = pygame.image.load('sum.png').convert_alpha()
 
-admin = input("Tên Tài Khoản : ")
-passwd = input("Mật Khẩu : ")
-if admin == adm:
-        if passwd == paswd:
-                print("Login Thành Công")
-                time.sleep(2)
-else:
-        print("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng !")
-        exit()
+load_avatar = pygame.image.load('avt1.png').convert_alpha()
 
-chat_list = [
-        "thâm vklll",
-        "thâm vãi",
-        "thâm như dái chó",
-        "đánh tài ra xỉu",
-        "đánh xỉu ra tài dkmmmmmmm",
-        "mong húp tay này",
-        "cho em húp 1 tay đi",
-        "thông 4 tay",
-        "thông 7 tay rồiiiiiii",
-        "nettttttttttttttttttttttttt",
-        "con chó admin",
-        "thg làm game như buồi tao",
-        "vãi cả cứt, cút ra đảo luôn",
-        "game súc vật",
-        "néttttt",
-        "địt mẹ mày",
-        "chua như cứt mèo thế này",
-        "cầu 1-1 bú đi các em",
-        "bẻ 1-1 luôn , sợ chó gì",
-        "cầu 4321 đẹp thế ",
-        "nét cầu 2112",
-        "2112 kìa , bẻ là ngu đấy",
-        "quên 2112 đi, cầu 212 đấy",
-        "ngu thế",
-        "do tham thôi:(",
-        "dẩm lồn thật sự",
-        "bẻ tài bằng chết",
-        "CÓ CHẾT CŨNG PHẢI RA XỈU",
-        "xỉu tất tay",
-        "xỉu tiếp",
-        "dỉu tieeps",
-        "xỉu 10 bú đi các cháu",
-        "631 đéo phải nặn đâu , tất xỉu đi",
-        "kakakakak, lukaku kìa",
-        "ngon rồi",
-        "xỉu ra đảo nhé",
-        "đm cay dái thế nhỉ",
-        "vcl kìa?",
-        "sao đm chán đời thế nhỉ",
-        "muốn đấm thg top 1",
-        "thg ad chim lỏ ra xỉu đi",
-        "vai ca lon",
-        "huppp",
-        "cut roi",
-        "vaiz lồn lại gãy",
-        "địt mẹ sao lại có tài xỉu nhỉ",
-        "game cứt chó này",
-        "game đớp nhiều tiền vkl",
-        "Thằng Lồn ad",
-        "32 ra 6 đmmmmmmm",
-        "thằng làm game súc vật vãi",
-        "thg top 1 sống bỉ",
-        "hahahahahah",
-        "đi ỉa, bốc cứt lên ăn cho đỡ đói",
-        "cút luôn",
-        "ra đảo luôn, dkmmm",
-        "dit to chung may",
-        "có chết cũng tài",
-        "bẻ tài bằng được",
-        "bọn mày trêu tao à ?",
-        "tiền chứ có phải lá mít đéo đâu ?",
-        "dkm tham vãi lồn",
-        "top 1 lộc đi",
-        "tài ad ơi",
-        "dỉu đi ad",
-        "bú dcmmmmmmmm",
-        "đập nát con game",
-        "đánh tay nào chết tay đấy dkm",
-        "1 phát ăn thì nó trả, địt mẹ game",
-        "Tài hahahahahahahah",
-        "Dm chó má vl",
-        "bịp vãi cả lồn ra",
-        "rút đc tiền mà ?",
-        "tay này xịt, bố vào quay hũ",
-        "may nó trả",
-        "mừ ba",
-        "dm chó game",
-        "dm Xỉu rồiii",
-        "TÀIIIIIIIIIIIIIIIIIIII",
-        "xỉuuuuuuuuuuuuuuu",
-        "má",
-        "631",
-        "642",
-        "542",
-        "cầu mong ad cho em bú 1 tay",
-        "toàn bot nch với nhau à ??",
-        "Chênh vênh chưa ?",
-        "chim cút luôn rồi",
-        "hết tay này t đéo phải đi wave nưac",
-        "Lol má game",
-        "Chênh vênh vcl",
-        "Syyyyyyyyyyyyyy",
-        "KÉP 10 TAY SAU",
-        "Messsi cứ emm",
-        "Ronaldooo Bú",
-        "Messi rồi",
-        "Cmmmmm ad",
-        "BU X6",
-        "hết 10m",
-        "hôm nay chênh vênh quá ae",
-        "bắt con tài",
-        "bú con xỉu",
-        "xỉu nét",
-        "xỉu ra đảo",
-        "XỈU RA ĐẢO",
-        "có lồn xỉu",
-        "NÉT TÀI",
-        "lag à?",
-        "5, 8",
-        "nặn là thua",
-        "dcm, haizz",
-        "vl, giờ mới đặt",
-        "may vcl, may đéo đặt cược",
-        "đm",
-        "?",
-        "lại bệt rồi",
-        "ôm bệt đi, bẻ là ngu",
-        "bệt kìa",
-        "bẻ là ngu, là cút",
-        "bọn ngu hay đi bẻ",
-        "123 nặn đẹp luôn",
-        "X",
-        "T",
-        "xỉu cc",
-        "địt mẹ tài",
-        "lại trả vãi lồn game",
-        "xin con xỉu ad ơi",
-        "xin con tài admin owiiiiii",
-        "đm cuộc đời",
-        "xỉu 6",
-        "tài 11",
-        "vị này là vị lồn",
-        "bọn máu cặc",
-        "biết mà cố chấp",
-        "xỉu về , xỉu về",
-        "dmmmmmmmmmm",
-        "rơi xâu vl",
-        "tê vãi dái",
-        "net ko",
-        "lụm , lụm",
-        "rồi bịp",
-        "cu cứu",
-        "1",
-        "1-1 có à ?",
-        "Dkmmmmmmmmmmmm",
-        "Địt Mẹ Vãi lồn game ??",
-        "vkl 63 ra 1, nghỉ mẹ đi",
-        "chơi làm cc j nữa ?",
-        "Húpppppp:)!",
-        "Bú Ae ơi kk",
-        "uồi",
-        "admin đẹp zaiiiiiii vãi bướm",
-        "Top 1 lộc tôi đi:)",
-        "Cầu lồn gì đây ??",
-        "Địt con mẹ",
-        "tay này đéo ăn, tối bố nhảy sông",
-        "Ngu rồi",
-        "Bọn củ cặc này",
-        "phán như đầu buồi bố m ý?",
-        "Gãy 5m rồi",
-        "đkmmmmmmmm cay dái thế",
-        "Đkm thg ad buồi lồn",
-        "Ae lộc tôi đc k:(",
-        "Uớc đc ae lộc ạ",
-        "vãi lồn cầu kìa",
-        "chán vãi cứt",
-        "cầu kiểu đéo gì vậy",
-        "Nốt Tay này nghỉ",
-        "đéo chơi nưa",
-        "Tất Tay tài đi",
-        "Tài toooooo",
-        "Bú Tài",
-        "Tài ra đảo",
-        "Bú, nặn 65 vứt bát",
-        "nặn làm cặc gì nx",
-        "húp chưaaaaa",
-        "63 ra 2",
-        "ngon đét",
-        "bú, 61 ra 4",
-        "tưởng tối nay ăn cứt thay cơm",
-        "Bú 10m",
-        "Xỉu to",
-        "Nổ hũ",
-        "NỔ HŨ",
-        "nổ",
-        "hũ to vc",
-        "thg ad sướng vkl",
-        "Bú con xỉu đi ae",
-        "Nặn 31 đập bát",
-        "22 nặn làm đéo rì nữa ae =))",
-        "ui sời , nét như sony",
-        "Admin đẹp trai thế chứ lị",
-        "cầu đẹp vkl",
-        "done tôi với ae",
-        "Bọn củ cặc",
-        "chmay phán kiểu đéo rì đây ?",
-        "Bọn ngu lồn cứ thích phán",
-        "ad khoá mẹ mõm chno đi",
-        "húppppppp",
-        "húp",
-        "mùi này mới là mùi tiền kk",
-        "thơm phức haha",
-        "nétt con tài",
-        "Nét Con xỉu",
-        "cầu bẻ đấy ae",
-        "nét chưa kkkkkk",
-        "múp nước thế =))",
-        "thôi nghỉ",
-        "tao đi rút tiền đây",
-        "LÊN CHUẨN TÀI 12",
-        "chết mẹ rồi",
-        "Trả Cc đkmm",
-        "đéo hiểu cầu",
-        "chán",
-        "xỉu to đi ae",
-        "dkm ad",
-        "tứ 11",
-        "LÊN CON XỈU",
-        "chênh vênh",
-        "VÃI LỒN",
-        "vãi cặc thật sự luôn",
-        "Ôm đi",
-        "bẻ là chết",
-        "game bịp vãi",
-        "cầu bịp",
-        "XỈU TO",
-        "admin ơi, cho em bú 1 tay đi",
-        "đù, đấm thông 5 tay",
-        "Vẫn Tài Được",
-        "lại xỉu, dcm chán",
-        "boss cân vkl",
-        "vãi cứt trả tiền ạ",
-        "xỉu 3 nổ hũ",
-        "BÚ X10",
-        "bú T12",
-        "game khốn nạn",
-        "đấm nốt tay tao rút",
-        "cho adm",
-        "bịp kk",
-        "chấp nhận số phận thôi",
-        "nút 1 của tao đâu ??",
-        "nút 11 kìa",
-        "đm bịp rồi",
-        "gãy nhiều vãi lồn",
-        "xúc cứt ăn vã rồi",
-        "tối nay bỏ nhà đi bụi",
-        "thế là mất con xe",
-        "dcu m admin",
-        "tài tiếp",
-        "có cải cứt tài",
-        "bip roi",
-        "phải bắt bằng được con 22",
-        "vc",
-        "15",
-        "14",
-        "T11",
-        "10",
-        "9",
-        "X8",
-        "X7",
-        "mútt",
-        "6",
-        "câm mồm",
-        "ngu thì chết",
-        "tham thì thâm",
-        "đéo tài , tao đi ỉa.",
-        "ĐÉO XỈU, T OFF RÚT TIỀN",
-        "cân đi đm chúng m",
-        "Game này rút đc không ae?",
-        "game này rút đc",
-        "Phán đi kìa, thánh phán đâu",
-        "thể hiện tài năng thánh phán đi",
-        "phán đc đấy",
-        "Phán như đầu buồi ý",
-        "phán cái máu lồn",
-        "gãy all",
-]
+# coins 
+coin_real = 200000000
+# color
+WHITE = (255,255,255)
+BLACK = (0,0,0,0)
+GREY = (150,150,150,150)
+YELLOW = (255,255,0)
+RED = (255,0,0)
+
+def draw_bg():
+	bg_dr = pygame.transform.scale(banner, (screen_x, screen_y))
+	screen.blit(bg_dr, (0, 0))
+def draw_mini_game():
+	mini_game = pygame.transform.scale(mini_game_banner, (740, 470))
+	screen.blit(mini_game, (0, 0))
+
+def load_avatars():
+	bg_avt = pygame.Rect(0, 0, 165, 55)
+	avt = pygame.transform.scale(load_avatar, (50, 50))
+	pygame.draw.rect(screen, BLACK, bg_avt)
+	screen.blit(avt, (0, 0))
+
+def load_tnv():
+	font_tnv = pygame.font.Font(None, 40)
+	print_tnv = font_tnv.render("admin", True, WHITE)
+	screen.blit(print_tnv, (55, 3))
+	def load_coins():
+		font_coins = pygame.font.Font(None, 20)
+		print_coins = font_coins.render("987,843,000 $", True, YELLOW)
+		screen.blit(print_coins, (60, 35))
+	load_coins()
+
+# varble font
+font_dat_cuoc1 = pygame.font.Font(None, 30)
+font_dat_cuoc2 = pygame.font.Font(None, 30)
+
+text_dat_cuoc1 = font_dat_cuoc1.render("dat cuoc", True, BLACK)
+text_dat_cuoc2 = font_dat_cuoc2.render("dat cuoc", True, BLACK)
+
+def dat_cuoc():
+	font_dat_cuoc3 = pygame.font.Font(None, 36)
+	print_dat_cuoc3 = font_dat_cuoc3.render("Dat Cuoc", True, BLACK)
+	screen.blit(print_dat_cuoc3, (327, 366))
+
+	def font_all_in():
+		font_all_ins = pygame.font.Font(None, 25)
+		print_all_in = font_all_ins.render("All In", True, BLACK)
+		screen.blit(print_all_in, (200, 380))
+
+	font_all_in()
+
+	def font_huy_cuoc():
+		font_huy = pygame.font.Font(None, 25)
+		print_huy_cuoc = font_huy.render("Huy", True, BLACK)
+		screen.blit(print_huy_cuoc, (525, 380))
+
+	font_huy_cuoc()
+
+def font_tien_cuoc():
+	font_1k = pygame.font.Font(None, 25)
+	print_1k = font_1k.render("1k", True, BLACK)
+	screen.blit(print_1k, (110, 415))
+
+	font_10k = pygame.font.Font(None, 25)
+	print_10k = font_10k.render("10k", True, BLACK)
+	screen.blit(print_10k, (190, 415))
+
+	font_100k = pygame.font.Font(None, 25)
+	print_100k = font_100k.render("100k", True, BLACK)
+	screen.blit(print_100k, (275, 415))
+
+	font_1m = pygame.font.Font(None, 25)
+	print_1m = font_1m.render("1m", True, BLACK)
+	screen.blit(print_1m, (370, 415))
+
+	font_10m = pygame.font.Font(None, 25)
+	print_10m = font_10m.render("10m", True, BLACK)
+	screen.blit(print_10m, (454, 415))
+
+	font_50m = pygame.font.Font(None, 25)
+	print_50m = font_50m.render("50m", True, BLACK)
+	screen.blit(print_50m, (543, 415))
+
+	font_100m = pygame.font.Font(None, 25)
+	print_100m = font_100m.render("100m", True, BLACK)
+	screen.blit(print_100m, (625, 415))
+
+countdown_time = 50
+start_time = time.time()
+end_time = start_time + countdown_time
+
+so_coins_cuoc = 1
+so_coins_cuoc1 = 1
 
 user_list = [
         "hupdiem",
@@ -411,173 +212,146 @@ user_list = [
         "emba5599",
 ]
 
-os.system('cls' if os.name == 'nt' else 'clear')
+bot_dat_cuoc = [ "TAI", "XIU" ]
+bot1 = random.randint(1, 20)
+bot2 = random.randint(1, 20)
 
-def menu_admin():
-        print("""
-           _____  __  __ _____ _   _ 
-     /\   |  __ \|  \/  |_   _| \ | |
-    /  \  | |  | | \  / | | | |  \| |
-   / /\ \ | |  | | |\/| | | | | . ` |
-  / ____ \| |__| | |  | |_| |_| |\  |
- /_/    \_\_____/|_|  |_|_____|_| \_|
-                                     
-                        (Pham Chien)
+so_ng_cuoc = []
+so_phien = []
 
-Tool Quản Trị Viên Tài Xỉu
+times1 = 50
+session_game = True
+while session_game:
 
-1, Quản Lý Tài Xỉu
-2, Quản Lý Chat online
-3, Quản Lý Số dư người chơi
-4, Quản Lý nạp tiền
-5, Quản Lý rút tiền
-6, Quản Lý Thông Tin Người Chơi
-7, Đăng Xuất
+	draw_bg()
+	draw_mini_game()
+	load_avatars()
+	load_tnv()
+	dat_cuoc()
+	font_tien_cuoc()
+
+	times1 = times1 - 1
+	font_times = pygame.font.Font(None, 120)
+	text_times = font_times.render(str(times1), True, YELLOW)
+	screen.blit(text_times, (325, 205))
+
+	random_bot1 = random.randint(1, 30)
+	bot1 = bot1 + random_bot1
+	font_bot1 = pygame.font.Font(None, 15)
+	text_bot1 = font_bot1.render(f"{bot1}", True, BLACK)
+	screen.blit(text_bot1, (243, 146))
+
+	random_bot2 = random.randint(1, 30)
+	bot2 = bot2 + random_bot2
+	font_bot2 = pygame.font.Font(None, 15)
+	text_bot2 = font_bot2.render(f"{bot2}", True, BLACK)
+	screen.blit(text_bot2, (490, 145))
+# =====================================================================
+# so tien cuoc
+	randoms_cuoc = random.randint(1, 30)
+	so_coins_cuoc = randoms_cuoc + so_coins_cuoc
+	so_xu_tram = random.randint(100, 999)
+	duoi_xu = f",{so_xu_tram},000"
+	font_fake_cuoc = pygame.font.Font(None, 30)
+	print_fake_cuoc = font_fake_cuoc.render(f"{so_coins_cuoc}{duoi_xu}", True, YELLOW)
+	screen.blit(print_fake_cuoc, (120, 235))
+
+	randoms_cuoc1 = random.randint(1, 30)
+	so_coins_cuoc1 = randoms_cuoc1 + so_coins_cuoc1
+	so_xu_tram1 = random.randint(100, 999)
+	duoi_xu1 = f",{so_xu_tram1},000"
+	font_fake_cuoc1 = pygame.font.Font(None, 30)
+	print_fake_cuoc1 = font_fake_cuoc1.render(f"{so_coins_cuoc1}{duoi_xu1}", True, YELLOW)
+	screen.blit(print_fake_cuoc1, (505, 235))
+
+	time.sleep(1)
+
+	tnv1 = random.choice(user_list)
+	bdc = random.choice(bot_dat_cuoc)
+	tien_cuoc = random.randint(1, 20)
+	print(f"{tnv1} dat cuoc {bdc}, so tien cuoc : {tien_cuoc},000,000")
+
+
+	screen.blit(text_dat_cuoc1, (135, 265))
+	screen.blit(text_dat_cuoc2, (530, 265))
+
+	if times1 == 0:
+		times1 = 50
+		xn1 = int(input("Nhap Ket Qua Xi Ngau 1 : "))
+		if xn1 > 6:
+			print("Ket Qua Khong Duoc Lon Hon 6")
+			break
+		xn2 = int(input("Nhap Ket Qua Xi Ngau 2 : "))
+		if xn2 > 6:
+			print("Ket Qua Khong Duoc Lon Hon 6")
+			break
+		xn3 = int(input("Nhap Ket Qua Xi Ngau 3 : "))
+		if xn3 > 6:
+			print("Ket Qua Khong Duoc Lon Hon 6")
+			break
+		ket_qua = f"{xn1}-{xn2}-{xn3}"
+		tong_diem = int(xn1 + xn2 + xn3)
+		tai = [11,12,13,14,15,16,17,18]
+		xiu = [3,4,5,6,7,8,9,10]
+		font_kq = pygame.font.Font(None, 60)
+
+		if tong_diem in tai:
+			print(f"""
+	(
+		"Ket_QUa": "TAI",
+		"Ket_qua_xi_ngau" : "{ket_qua}",
+		"Tong_Diem" : "{tong_diem}",
+		"So_Nguoi_Cuoc_Tai" : "{bot1}",
+		"So_Nguoi_Cuoc_Xiu" : "{bot2}",
+		"Tong_Cuoc_Tai" : "{so_coins_cuoc}{duoi_xu}",
+		"Tong_Cuoc_Xiu" : "{so_coins_cuoc1}{duoi_xu1}"
+	)
+	""")
+			text1 = font_kq.render(f"{ket_qua}", True, RED)
+			screen.blit(text1, (320, 230))
+
+
+		if tong_diem in xiu:
+			print(f"""
+	(
+		"Ket_QUa": "XIU",
+		"Ket_qua_xi_ngau" : "{ket_qua}",
+		"Tong_Diem" : "{tong_diem}",
+		"So_Nguoi_Cuoc_Tai" : "{bot1}",
+		"So_Nguoi_Cuoc_Xiu" : "{bot2}",
+		"Tong_Cuoc_Tai" : "{so_coins_cuoc}{duoi_xu}",
+		"Tong_Cuoc_Xiu" : "{so_coins_cuoc1}{duoi_xu1}"
+	)
+	""")
+			text1 = font_kq.render(f"{ket_qua}", True, RED)
+			screen.blit(text1, (320, 230))
+
+		bot1 = random.randint(1, 40)
+		bot2 = random.randint(1, 40)
+		so_coins_cuoc = 1
+		so_coins_cuoc1 = 1
+
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			session_game = False
+
+		elif event.type == pygame.MOUSEBUTTONDOWN:
+			mouse_pos = pygame.mouse.get_pos()
+			if 135 < mouse_pos[0] < 300 and 265 < mouse_pos[1] < 315:
+				print("""
+{
+	"user" : "ADMIN"
+	"dat_cuoc" : "TAI"
+}
 """)
-        menu = input("Vui Lòng Chọn Mục : ")
-        if menu == "1":
-                while True:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        print("BẮT ĐẦU PHIÊN MỚI..")
-                        print("Bắt Đầu Đặt Cược")
-                        print("")
-                        stt = 0
-                        for i in range(1, 300):
-                                stt += 1
-                                bot = random.choice(user_list)
-                                tien_cuoc = random.randint(1, 100)
-                                duoi_tien = [ ",000,000", ",000" ]
-                                duoi_tien = random.choice(duoi_tien)
-                                dat_cuoc = [ "TÀI", "XỈU" ]
-                                dat_cuoc = random.choice(dat_cuoc)
-                                print(f"{stt}, {Fore.GREEN}{Style.BRIGHT}{bot}{Style.RESET_ALL} đã đặt cược {Fore.RED}{Style.BRIGHT}{dat_cuoc}{Style.RESET_ALL} với số tiền cược là {Fore.YELLOW}{Style.BRIGHT}{tien_cuoc}{duoi_tien}${Style.RESET_ALL}")
-                                time.sleep(0.10)
-                        print("")
-                        tiens1 = random.randint(250, 950)
-                        tiens2 = random.randint(250, 950)
-                        duoi_tien = [ f",{tiens2},{tiens1}", f",{tiens1},{tiens2}" ]
-                        print(f"Hết Thời Gian Cược.")
-                        tiens1 = random.randint(250, 950)
-                        duoi_tien = random.choice(duoi_tien)
-                        bot_cuoc1 = random.randint(99, 500)
-                        print(f"TÀI : {bot_cuoc1} --> {Fore.YELLOW}{Style.BRIGHT}{tiens1}{duoi_tien}${Style.RESET_ALL}")
-                        duoi_tien1 = [ f",{tiens1},{tiens2}", f",{tiens2},{tiens1}" ]
-                        duoi_tien1 = random.choice(duoi_tien1)
-                        bot_cuoc2 = random.randint(99, 500)
-                        print(f"XỈU : {bot_cuoc2} --> {Fore.YELLOW}{Style.BRIGHT}{tiens2}{duoi_tien1}${Style.RESET_ALL}")
-                        time.sleep(10)
-                        print("1, Thay đổi các viên xí ngầu/xúc xắc")
-                        print("2, Ngẫu Nhiên Xúc Xắc")
-                        choose = input("Vui Lòng Chọn : ")
-                        if choose == "1":
-                                xn1 = int(input("Nhập Kết quả 1 : "))
-                                xn2 = int(input("Nhập Kết quả 2 : "))
-                                xn3 = int(input("Nhập Kết quả 3 : "))
-                                kq = int(xn1 + xn2 + xn3)
-                                tai = [11,12,13,14,15,16,17,18]
-                                xiu = [3,4,5,6,7,8,9,10]
-                                print("Đang Tung Xúc Xắc..")
-                                time.sleep(1)
-                                if kq in tai:
-                                        print(f"Kết Quả Phiên Này Là : {Fore.RED}{Style.BRIGHT}{xn1}-{xn2}-{xn3} TÀI {kq}{Style.RESET_ALL}")
-                                        time.sleep(10)
-                                if kq in xiu:
-                                        print(f"Kết Quả Phiên Này Là : {Fore.RED}{Style.BRIGHT}{xn1}-{xn2}-{xn3} XỈU {kq}{Style.RESET_ALL}")
-                                        time.sleep(10)
 
-                        if choose == "2":
-                                xn1 = random.randint(1,6)
-                                xn2 = random.randint(1,6)
-                                xn3 = random.randint(1,6)
-                                kq = int(xn1 + xn2 + xn3)
-                                tai = [11,12,13,14,15,16,17,18]
-                                xiu = [3,4,5,6,7,8,9,10]
-                                print("Đang Tung Xúc Xắc..")
-                                time.sleep(1)
-                                if kq in tai:
-                                        print(f"Kết Quả Phiên Này Là : {Fore.RED}{Style.BRIGHT}{xn1}-{xn2}-{xn3} TÀI {kq}{Style.RESET_ALL}")
-                                        time.sleep(10)
-                                if kq in xiu:
-                                        print(f"Kết Quả Phiên Này Là : {Fore.RED}{Style.BRIGHT}{xn1}-{xn2}-{xn3} XỈU {kq}{Style.RESET_ALL}")
-                                        time.sleep(10)
-        if menu == "2":
-                os.system('cls' if os.name == 'nt' else 'clear')
-                stt = 0
-                while True:
-                        stt += 1
-                        bot = random.choice(user_list)
-                        chat = random.choice(chat_list)
-                        print(f"{stt}, {Fore.GREEN}{Style.BRIGHT}{bot}{Style.RESET_ALL} : {chat}")
-                        time.sleep(0.30)
+			if 530 < mouse_pos[0] < 605 and 265 < mouse_pos[1] < 315:
+				print("""
+{
+	"user" : "ADMIN"
+	"dat_cuoc" : "XIU"
+}
+""")
 
-        if menu == "3":
-                while True:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        print("TNV   |   Số Dư")
-                        stt = 0
-                        for bot in user_list:
-                                stt += 1
-                                xu = random.randint(1, 100)
-                                duoi_xu = [ ",000,000", ",000" ]
-                                duoi_xu = random.choice(duoi_xu)
-                                print(f"{stt}, {Fore.GREEN}{Style.BRIGHT}{bot}{Style.RESET_ALL} Số Dư Tài Khoản Còn : {Fore.YELLOW}{Style.BRIGHT}{xu}{duoi_xu}${Style.RESET_ALL},")
-                        time.sleep(50)
-
-        if menu == "4":
-                while True:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        print("STT  |   TNV  |   Số Tiền Nạp   |    Phương Thức Nạp   |    Mã Giao Dịch")
-                        stt = 0
-                        for i in range(1, 150):
-                                stt += 1
-                                code = random.randint(11111111, 999999999)
-                                bot = random.choice(user_list)
-                                nap = random.randint(10, 100)
-                                duoi_xu = [",000,000", ",000"]
-                                duoi_xu = random.choice(duoi_xu)
-                                pt_nap = [ "Nạp Bank" ]
-                                pt_nap = random.choice(pt_nap)
-                                print(f"{stt}, {Fore.GREEN}{Style.BRIGHT}{bot}{Style.RESET_ALL}  |  {nap}{duoi_xu}   |   {pt_nap}   |   MVN{code}")
-                        time.sleep(1000)
-
-        if menu == "5":
-                while True:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        print("STT  |   TNV  |   Số Tiền RÚT   |   Ngân Hàng   |    Mã Giao Dịch  | STK")
-                        stt = 0
-                        for i in range(1, 150):
-                                stt += 1
-                                code = random.randint(11111111, 9999999999)
-                                stk = random.randint(11111111, 9999999999)
-                                bot = random.choice(user_list)
-                                nap = random.randint(200, 500)
-                                duoi_xu = [",000,000", ",000"]
-                                duoi_xu = random.choice(duoi_xu)
-                                pt_nap = [ "VCB", "BDIV", "AGRB", "MB", "VTB" ]
-                                pt_nap = random.choice(pt_nap)
-                                print(f"{stt}, {Fore.GREEN}{Style.BRIGHT}{bot}{Style.RESET_ALL}  |  {nap}{duoi_xu}   |   {pt_nap}   |   MWVC{code}   |   {stk}")
-                        time.sleep(1000)
-
-        if menu == "6":
-                os.system('cls' if os.name == 'nt' else 'clear')
-                while True:
-                        stt = 0
-                        print("STT  |   TNV  |   SDT   |  Ngày Đăng Ký  |  Số Dư")
-                        for bot in user_list:
-                                xu = random.randint(1, 500)
-                                duoi_xu = [",000,000", ",000"]
-                                duoi_xu = random.choice(duoi_xu)
-                                sdt = random.randint(111111111, 999999999)
-                                date = random.randint(1, 30)
-                                date2 = random.randint(1, 12)
-                                date_c = ["2023", "2024"]
-                                date_c = random.choice(date_c)
-                                stt += 1
-                                print(f"{stt}, {Fore.GREEN}{Style.BRIGHT}{bot}{Style.RESET_ALL}  |  0{sdt}  | {date}/{date2}/{date_c}  |  {xu}{duoi_xu}$")
-                        time.sleep(100000)
-
-        if menu == "7":
-                print("Đăng xuất thành công")
-                exit()
-
-menu_admin()
+	pygame.display.flip()
