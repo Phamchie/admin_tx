@@ -220,6 +220,7 @@ so_ng_cuoc = []
 so_phien = []
 
 times1 = 50
+
 session_game = True
 while session_game:
 
@@ -230,25 +231,30 @@ while session_game:
 	dat_cuoc()
 	font_tien_cuoc()
 
+	so_phien = f"#23734762"
+	font_phien = pygame.font.Font(None, 20)
+	text_phien = font_phien.render(str(so_phien), True, BLACK)
+	screen.blit(text_phien, (340, 140))
+
 	times1 = times1 - 1
 	font_times = pygame.font.Font(None, 120)
 	text_times = font_times.render(str(times1), True, YELLOW)
 	screen.blit(text_times, (325, 205))
 
-	random_bot1 = random.randint(1, 30)
+	random_bot1 = random.randint(1, 40)
 	bot1 = bot1 + random_bot1
 	font_bot1 = pygame.font.Font(None, 15)
 	text_bot1 = font_bot1.render(f"{bot1}", True, BLACK)
 	screen.blit(text_bot1, (243, 146))
 
-	random_bot2 = random.randint(1, 30)
+	random_bot2 = random.randint(1, 40)
 	bot2 = bot2 + random_bot2
 	font_bot2 = pygame.font.Font(None, 15)
 	text_bot2 = font_bot2.render(f"{bot2}", True, BLACK)
 	screen.blit(text_bot2, (490, 145))
 # =====================================================================
 # so tien cuoc
-	randoms_cuoc = random.randint(1, 30)
+	randoms_cuoc = random.randint(1, 35)
 	so_coins_cuoc = randoms_cuoc + so_coins_cuoc
 	so_xu_tram = random.randint(100, 999)
 	duoi_xu = f",{so_xu_tram},000"
@@ -256,7 +262,7 @@ while session_game:
 	print_fake_cuoc = font_fake_cuoc.render(f"{so_coins_cuoc}{duoi_xu}", True, YELLOW)
 	screen.blit(print_fake_cuoc, (120, 235))
 
-	randoms_cuoc1 = random.randint(1, 30)
+	randoms_cuoc1 = random.randint(1, 35)
 	so_coins_cuoc1 = randoms_cuoc1 + so_coins_cuoc1
 	so_xu_tram1 = random.randint(100, 999)
 	duoi_xu1 = f",{so_xu_tram1},000"
@@ -269,7 +275,13 @@ while session_game:
 	tnv1 = random.choice(user_list)
 	bdc = random.choice(bot_dat_cuoc)
 	tien_cuoc = random.randint(1, 20)
-	print(f"{tnv1} dat cuoc {bdc}, so tien cuoc : {tien_cuoc},000,000")
+	print(f"""
+(
+	"Username" : "{tnv1}",
+	"Cong_dat" : "{bdc}",
+	"Tien_Cuoc" : "{tien_cuoc}{duoi_xu}"
+)
+""")
 
 
 	screen.blit(text_dat_cuoc1, (135, 265))
@@ -277,18 +289,9 @@ while session_game:
 
 	if times1 == 0:
 		times1 = 50
-		xn1 = int(input("Nhap Ket Qua Xi Ngau 1 : "))
-		if xn1 > 6:
-			print("Ket Qua Khong Duoc Lon Hon 6")
-			break
-		xn2 = int(input("Nhap Ket Qua Xi Ngau 2 : "))
-		if xn2 > 6:
-			print("Ket Qua Khong Duoc Lon Hon 6")
-			break
-		xn3 = int(input("Nhap Ket Qua Xi Ngau 3 : "))
-		if xn3 > 6:
-			print("Ket Qua Khong Duoc Lon Hon 6")
-			break
+		xn1 = random.randint(1,6)
+		xn2 = random.randint(1,6)
+		xn3 = random.randint(1,6)
 		ket_qua = f"{xn1}-{xn2}-{xn3}"
 		tong_diem = int(xn1 + xn2 + xn3)
 		tai = [11,12,13,14,15,16,17,18]
@@ -307,7 +310,7 @@ while session_game:
 		"Tong_Cuoc_Xiu" : "{so_coins_cuoc1}{duoi_xu1}"
 	)
 	""")
-			text1 = font_kq.render(f"{ket_qua}", True, RED)
+			text1 = font_kq.render(f"{ket_qua}", True, WHITE)
 			screen.blit(text1, (320, 230))
 
 
@@ -323,7 +326,7 @@ while session_game:
 		"Tong_Cuoc_Xiu" : "{so_coins_cuoc1}{duoi_xu1}"
 	)
 	""")
-			text1 = font_kq.render(f"{ket_qua}", True, RED)
+			text1 = font_kq.render(f"{ket_qua}", True, WHITE)
 			screen.blit(text1, (320, 230))
 
 		bot1 = random.randint(1, 40)
